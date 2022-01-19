@@ -13,6 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         &lt;!&ndash; Customize your theme here. &ndash;&gt;
     </style>-->
+    <style name="Theme.HuaweiTest.NoActionBar" parent="Theme.HuaweiTest">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
      <style name="Theme.HuaweiTest" parent="Theme.Design.Light">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
@@ -26,6 +30,8 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="Theme.HuaweiTest.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.HuaweiTest.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

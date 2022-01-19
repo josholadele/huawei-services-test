@@ -1,72 +1,154 @@
 package com.josholadele.huaweitest
 
 import android.content.Intent
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
-import com.huawei.agconnect.auth.AGConnectAuth
-import com.huawei.agconnect.auth.PhoneUser
-import com.huawei.agconnect.auth.VerifyCodeSettings
+import com.google.android.material.textfield.TextInputEditText
+import com.huawei.agconnect.auth.*
+import com.huawei.hmf.tasks.Task
 import com.josholadele.huaweitest.cache.AppSharedPreference
+import com.josholadele.huaweitest.utilities.Utilities
 import java.util.*
 
 class SetupActivity : AppCompatActivity() {
 
-    lateinit var appSharedPreference : AppSharedPreference
+    lateinit var appSharedPreference: AppSharedPreference
+
+    var isEmail = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setup)
+        setContentView(R.layout.activity_setup_)
 
         appSharedPreference = AppSharedPreference()
 
         val signupButton = findViewById<Button>(R.id.sign_up)
         val signinButton = findViewById<Button>(R.id.sign_in)
 
+        val phoneLayout = findViewById<LinearLayout>(R.id.phone_layout)
+
+        val emailET = findViewById<TextInputEditText>(R.id.email)
+        val phoneET = findViewById<TextInputEditText>(R.id.phone_number)
+        val passwordET = findViewById<TextInputEditText>(R.id.password)
+
+        val usePhoneTextView = findViewById<TextView>(R.id.use_phone)
+        val useEmailTextView = findViewById<TextView>(R.id.use_email)
+
+        usePhoneTextView.setOnClickListener {
+            if (isEmail) {
+                phoneLayout.visibility = VISIBLE
+                useEmailTextView.visibility = VISIBLE
+                usePhoneTextView.visibility = GONE
+                emailET.visibility = GONE
+                isEmail = !isEmail
+            }
+        }
+        useEmailTextView.setOnClickListener {
+            if (!isEmail) {
+                phoneLayout.visibility = GONE
+                useEmailTextView.visibility = GONE
+                usePhoneTextView.visibility = VISIBLE
+                emailET.visibility = VISIBLE
+                isEmail = !isEmail
+            }
+        }
+
+
+
+
         signupButton.setOnClickListener {
             val settings = VerifyCodeSettings.newBuilder()
                 .action(VerifyCodeSettings.ACTION_REGISTER_LOGIN)
                 .sendInterval(30)
-                .locale(Locale.CHINA)
+                .locale(Locale.UK)
                 .build()
-            val task = AGConnectAuth.getInstance().requestVerifyCode("+44", "07404373949", settings)
+
+
+            Utilities.showProgressDialog(this, "Please wait")
+            val task = if (isEmail) {
+                AGConnectAuth.getInstance().requestVerifyCode(emailET.text.toString(), settings)
+            } else {
+                AGConnectAuth.getInstance()
+                    .requestVerifyCode("+44", phoneET.text.toString(), settings)
+            }
+
             task.addOnSuccessListener {
                 // onSuccess
+                Utilities.hideProgressDialog()
                 Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
-                setUpNewUser()
+                var parcelableAuth = ParcelableAuth()
+                parcelableAuth.password = passwordET.text.toString()
+                parcelableAuth.isEmail = isEmail
+                if (isEmail) {
+                    parcelableAuth.email = emailET.text.toString()
+                } else {
+                    parcelableAuth.countryCode = "+44"
+                    parcelableAuth.phoneNumber = phoneET.text.toString()
+                }
+                val intent = Intent(this, SetupOTPActivity::class.java)
+                intent.putExtra("auth", parcelableAuth)
+                startActivity(intent)
+//                setUpNewUser()
             }.addOnFailureListener {
                 // onFail
-                Toast.makeText(this, "Error occurred", Toast.LENGTH_LONG).show()
+                Utilities.hideProgressDialog()
+                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
             }
         }
 
         signinButton.setOnClickListener(View.OnClickListener {
+            val credential = if (isEmail) {
+                EmailAuthProvider.credentialWithPassword(
+                    emailET.text.toString(),
+                    passwordET.text.toString()
+                )
+            } else {
+                PhoneAuthProvider.credentialWithPassword(
+                    "+44",
+                    phoneET.text.toString(),
+                    passwordET.text.toString()
+                )
+            }
+            Utilities.showProgressDialog(this, "Please wait")
+            AGConnectAuth.getInstance().signOut()
+            AGConnectAuth.getInstance().signIn(credential).addOnSuccessListener {
+                // Obtain sign-in information.
+                Utilities.hideProgressDialog()
+                Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
+                val user = AGConnectAuth.getInstance().currentUser
+
+                var parcelableAuth = ParcelableAuth()
+                parcelableAuth.isEmail = isEmail
+                if (isEmail) {
+                    parcelableAuth.email = emailET.text.toString()
+                } else {
+                    parcelableAuth.countryCode = "+44"
+                    parcelableAuth.phoneNumber = phoneET.text.toString()
+                }
+                parcelableAuth.userId=user.uid
+
+                appSharedPreference.saveLoggedInUser(parcelableAuth.toString())
+
+                val intent = Intent(this, HomeActivity::class.java)
+
+                startActivity(intent)
+
+            }.addOnFailureListener {
+                // onFail
+                Utilities.hideProgressDialog()
+                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+            }
+
 
         })
-    }
-
-    private fun setUpNewUser() {
-
-        val phoneUser = PhoneUser.Builder()
-            .setCountryCode("your country code")
-            .setPhoneNumber("your phoneNumber")
-            .setVerifyCode("verify code")
-            .setPassword("password")
-            .build()
-        AGConnectAuth.getInstance().createUser(phoneUser).addOnSuccessListener {
-            // A newly created user account is automatically signed in to your app.
-
-            val user = AGConnectAuth.getInstance().currentUser
-appSharedPreference.saveLoggedInUser()
-            val intent = Intent(this, MainActivity::class.java)
-
-            startActivity(intent)
-
-        }.addOnFailureListener {
-            // onFail
-        }
     }
 }
 

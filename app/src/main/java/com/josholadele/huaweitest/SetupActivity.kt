@@ -1,7 +1,6 @@
 package com.josholadele.huaweitest
 
 import android.content.Intent
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -11,10 +10,11 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.textfield.TextInputEditText
 import com.huawei.agconnect.auth.*
-import com.huawei.hmf.tasks.Task
 import com.josholadele.huaweitest.cache.AppSharedPreference
+import com.josholadele.huaweitest.models.ParcelableAuth
 import com.josholadele.huaweitest.utilities.Utilities
 import java.util.*
 
@@ -27,7 +27,8 @@ class SetupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setup_)
-
+//var aViewModel = ViewModelProvider(this).get(AViewModel::class.java)
+//        aViewModel.jas.coll
         appSharedPreference = AppSharedPreference()
 
         val signupButton = findViewById<Button>(R.id.sign_up)
@@ -84,7 +85,8 @@ class SetupActivity : AppCompatActivity() {
                 // onSuccess
                 Utilities.hideProgressDialog()
                 Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
-                var parcelableAuth = ParcelableAuth()
+                var parcelableAuth =
+                    ParcelableAuth()
                 parcelableAuth.password = passwordET.text.toString()
                 parcelableAuth.isEmail = isEmail
                 if (isEmail) {
@@ -125,7 +127,8 @@ class SetupActivity : AppCompatActivity() {
                 Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
                 val user = AGConnectAuth.getInstance().currentUser
 
-                var parcelableAuth = ParcelableAuth()
+                var parcelableAuth =
+                    ParcelableAuth()
                 parcelableAuth.isEmail = isEmail
                 if (isEmail) {
                     parcelableAuth.email = emailET.text.toString()
@@ -139,6 +142,7 @@ class SetupActivity : AppCompatActivity() {
 
                 val intent = Intent(this, HomeActivity::class.java)
 
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
 
             }.addOnFailureListener {

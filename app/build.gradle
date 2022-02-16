@@ -4,7 +4,11 @@ plugins {
     id 'com.huawei.agconnect'
 
 }
-
+apply plugin: 'com.huawei.agconnect'
+// Add this configuration to enable APM.
+agcp {
+    enableAPMS true
+}
 android {
     compileSdk 32
 

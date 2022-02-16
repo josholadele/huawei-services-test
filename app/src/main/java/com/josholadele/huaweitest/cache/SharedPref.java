@@ -35,6 +35,9 @@ public class SharedPref {
     public void putString(String name, String value) {
         editor.putString(name, value).commit();
     }
+    public void removeString(String name) {
+        editor.remove(name).commit();
+    }
 
     public String getString(String name, String defaultValue) {
         return pref.getString(name, defaultValue);

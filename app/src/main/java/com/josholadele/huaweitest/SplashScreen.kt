@@ -22,7 +22,7 @@ class SplashScreen : AppCompatActivity() {
 
 
         val config = AGConnectConfig.getInstance()
-
+        val userString = appSharedPreference.getUser()
         Handler(Looper.getMainLooper()).postDelayed({
             config.fetch().addOnSuccessListener {
                 config.apply(it)
@@ -33,18 +33,33 @@ class SplashScreen : AppCompatActivity() {
                     appNameTV.text = appName
                     Handler(Looper.getMainLooper()).postDelayed({
                         // Your Code
-                        val intent = Intent(this, SetupActivity::class.java)
-
+                        val intent = if (userString.isEmpty()) {
+                            Intent(this, SetupActivity::class.java)
+                        } else {
+                            Intent(this, HomeActivity::class.java)
+                        }
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                         startActivity(intent)
                     }, 2000)
                 } else {
-                    val intent = Intent(this, SetupActivity::class.java)
+                    val intent = if (userString.isEmpty()) {
+                        Intent(this, SetupActivity::class.java)
+                    } else {
+                        Intent(this, HomeActivity::class.java)
+                    }
 
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
                 }
             }.addOnFailureListener {
-                val intent = Intent(this, SetupActivity::class.java)
+                val intent = if (userString.isEmpty()) {
+                    Intent(this, SetupActivity::class.java)
+                } else {
+                    Intent(this, HomeActivity::class.java)
+                }
 
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                 startActivity(intent)
             }
 

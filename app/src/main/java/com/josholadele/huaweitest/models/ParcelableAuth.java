@@ -1,4 +1,4 @@
-package com.josholadele.huaweitest;
+package com.josholadele.huaweitest.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;

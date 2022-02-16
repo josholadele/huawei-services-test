@@ -1,22 +1,15 @@
 package com.josholadele.huaweitest
 
 import android.content.Intent
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 import com.huawei.agconnect.auth.*
-import com.huawei.hmf.tasks.Task
 import com.josholadele.huaweitest.cache.AppSharedPreference
+import com.josholadele.huaweitest.models.ParcelableAuth
 import com.josholadele.huaweitest.utilities.Utilities
-import java.util.*
 
 class SetupOTPActivity : AppCompatActivity() {
 

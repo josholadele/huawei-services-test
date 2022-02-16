@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">HuaweiTest</string>
     <string name="title_home">Home</string>
+    <string name="logout">Logout</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_setup">SetupActivity</string>

@@ -50,9 +50,12 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-    implementation 'com.huawei.agconnect:agconnect-auth:1.6.2.300'
     implementation 'com.huawei.agconnect:agconnect-core:1.6.2.300'
+    implementation 'com.huawei.agconnect:agconnect-auth:1.6.2.300'
     implementation 'com.huawei.agconnect:agconnect-cloud-database:1.5.0.300'
+    implementation 'com.huawei.agconnect:agconnect-remoteconfig:1.6.2.300'
+    implementation 'com.huawei.agconnect:agconnect-crash:1.6.3.300'
+    implementation 'com.huawei.agconnect:agconnect-apms:1.5.2.307'
     implementation 'androidx.annotation:annotation:1.2.0'
 
     implementation 'com.google.code.gson:gson:2.8.7'

@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/j84203799/Documents/development/HuaweiTest/app/src/main/res/layout/activity_home.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/j84203799/Documents/development/HuaweiTest/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/j84203799/Documents/development/HuaweiTest/app/src/main/res/layout/activity_setup.xml" value="0.22592592592592592" />
+        <entry key="..\:/Users/j84203799/Documents/development/HuaweiTest/app/src/main/res/layout/activity_setup_.xml" value="0.4" />
+        <entry key="..\:/Users/j84203799/Documents/development/HuaweiTest/app/src/main/res/layout/activity_setup_otp.xml" value="0.26614583333333336" />
         <entry key="..\:/Users/j84203799/Documents/development/HuaweiTest/app/src/main/res/layout/activity_splash_screen.xml" value="0.1" />
+        <entry key="..\:/Users/j84203799/Documents/development/HuaweiTest/app/src/main/res/layout/content_home.xml" value="0.264" />
+        <entry key="..\:/Users/j84203799/Documents/development/HuaweiTest/app/src/main/res/layout/layout_persistent_bottom_sheet.xml" value="0.33177083333333335" />
+        <entry key="..\:/Users/j84203799/Documents/development/HuaweiTest/app/src/main/res/menu/home_options_menu.xml" value="0.43020833333333336" />
       </map>
     </option>
   </component>

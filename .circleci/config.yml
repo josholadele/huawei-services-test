@@ -8,6 +8,9 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/orb-intro/
 orbs:
   android: circleci/android@1.0.3
+  jq: circleci/jq@2.2.0
+  appgalleryconnect: devwithzachary/appgalleryconnect@0.2.0
+
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -33,20 +36,28 @@ jobs:
           test-command: ./gradlew lint testDebug --continue
 
       # Then start the emulator and run the Instrumentation tests!
-      - android/start-emulator-and-run-tests:
-          test-command: ./gradlew connectedDebugAndroidTest
-          system-image: system-images;android-25;google_apis;x86
+      # - android/start-emulator-and-run-tests:
+      #     test-command: ./gradlew connectedDebugAndroidTest
+      #     system-image: system-images;android-25;google_apis;x86
 
       # And finally run the release build
       - run:
           name: Assemble release build
           command: |
             ./gradlew assembleRelease
+      - appgalleryconnect/upload:
+          appid: '105319627'
+          clientid: '105319627'
+          path: ~/app/build/outputs/apk/app-release-unsigned.apk
+          secret: test
+          suffix: apk
+          test: 'false'
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
+  build-test-upload-flow: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - build-and-test

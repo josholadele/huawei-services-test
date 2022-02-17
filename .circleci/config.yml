@@ -48,7 +48,7 @@ jobs:
       - appgalleryconnect/upload:
           appid: '105319627'
           clientid: '105319627'
-          path: '~/app/build/outputs/apk/app-release-unsigned.apk'
+          path: '/build/apk/android.apk'
           secret: test
           suffix: apk
           test: 'false'

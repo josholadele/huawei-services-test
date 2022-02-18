@@ -27,13 +27,13 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
-      - run:
-            name: chmod permissions
-            command: chmod +x ./gradlew
+      # - run:
+      #       name: chmod permissions
+      #       command: chmod +x ./gradlew
 
       # The next step will run the unit tests
-      - android/run-tests:
-          test-command: ./gradlew lint testDebug --continue
+      # - android/run-tests:
+      #     test-command: ./gradlew lint testDebug --continue
 
       # Then start the emulator and run the Instrumentation tests!
       # - android/start-emulator-and-run-tests:
@@ -44,8 +44,6 @@ jobs:
       - run:
           name: Assemble release build
           command: |
-            ./gradlew assembleRelease
-            pwd
             cp /home/circleci/project/app/build/outputs/apk/app-release-unsigned.apk /home/circleci/project/new_apk.apk
 
       # - appgalleryconnect/upload:

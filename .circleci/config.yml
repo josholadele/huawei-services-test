@@ -44,7 +44,7 @@ jobs:
       - run:
           name: Assemble release build
           command: |
-            ls /home/circleci/project
+            ls /home/circleci/project/app
 
       # - appgalleryconnect/upload:
       #     appid: '105319627'

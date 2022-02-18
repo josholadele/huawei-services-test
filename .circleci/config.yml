@@ -52,6 +52,7 @@ jobs:
             ls /home/circleci/project/app -a
             ls /home/circleci/project/app/build -a
             ls /home/circleci/project/app/build/outputs -a
+            ls /home/circleci/project/app/build/outputs/apk/release -a
 
       # - appgalleryconnect/upload:
       #     appid: '105319627'

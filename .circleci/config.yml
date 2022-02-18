@@ -46,14 +46,15 @@ jobs:
           command: |
             ./gradlew assembleRelease
             pwd
+            cp /home/circleci/project/app/build/outputs/apk/app-release-unsigned.apk new_apk.apk
 
-      - appgalleryconnect/upload:
-          appid: '105319627'
-          clientid: '105319627'
-          path: '/home/circleci/project/app/build/outputs/apk/app-release-unsigned.apk'
-          secret: test
-          suffix: apk
-          test: 'false'
+      # - appgalleryconnect/upload:
+      #     appid: '105319627'
+      #     clientid: '105319627'
+      #     path: '/home/circleci/project/app/build/outputs/apk/app-release-unsigned.apk'
+      #     secret: test
+      #     suffix: apk
+      #     test: 'false'
 
 
 # Invoke jobs via workflows

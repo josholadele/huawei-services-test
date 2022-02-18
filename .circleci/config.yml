@@ -27,9 +27,9 @@ jobs:
     steps:
       # Checkout the code as the first step.
       - checkout
-      # - run:
-      #       name: chmod permissions
-      #       command: chmod +x ./gradlew
+      - run:
+            name: chmod permissions
+            command: chmod +x ./gradlew
 
       # The next step will run the unit tests
       # - android/run-tests:
@@ -44,7 +44,14 @@ jobs:
       - run:
           name: Assemble release build
           command: |
+            ./gradlew assembleRelease
+      - run:
+          name: others
+          command: |
+            ls /home/circleci/project -a
             ls /home/circleci/project/app -a
+            ls /home/circleci/project/app/build -a
+            ls /home/circleci/project/app/build/outputs -a
 
       # - appgalleryconnect/upload:
       #     appid: '105319627'

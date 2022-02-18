@@ -53,7 +53,8 @@ jobs:
             ls /home/circleci/project/app/build -a
             ls /home/circleci/project/app/build/outputs -a
             ls /home/circleci/project/app/build/outputs/apk/release -a
-            chmod 775 /home/circleci/project/app/build/outputs/apk/release/apk-release-unsigned.apk
+            ls ~/app/build/outputs/apk/release -a
+            chmod 775 ~/app/build/outputs/apk/release/apk-release-unsigned.apk
             cp /home/circleci/project/app/build/outputs/apk/release/apk-release-unsigned.apk /home/circleci/project/app-build.apk
 
       # - appgalleryconnect/upload:

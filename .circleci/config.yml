@@ -55,6 +55,7 @@ jobs:
             ls /home/circleci/project/app/build/outputs -a
             ls /home/circleci/project/app/build/outputs/apk/release -a
             ls ~/project/app/build/outputs/apk/release -l -a
+            whoami
            # sudo chmod -R 775 ~/project/app/build/outputs/apk/release/apk-release-unsigned.apk
             # cp ~/project/app/build/outputs/apk/release/apk-release-unsigned.apk ~/project/app-build.apk
 

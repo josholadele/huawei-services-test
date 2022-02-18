@@ -44,7 +44,7 @@ jobs:
       - run:
           name: Assemble release build
           command: |
-            cp /home/circleci/project/app/build/outputs/apk/app-release-unsigned.apk /home/circleci/project/new_apk.apk
+            cp /home/circleci/project/app/build/outputs/apk/app-release.apk /home/circleci/project/new_apk.apk
 
       # - appgalleryconnect/upload:
       #     appid: '105319627'

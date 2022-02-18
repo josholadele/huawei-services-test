@@ -48,22 +48,23 @@ jobs:
       - run:
           name: others
           command: |
+            pwd
             ls /home/circleci/project -a
             ls /home/circleci/project/app -a
             ls /home/circleci/project/app/build -a
             ls /home/circleci/project/app/build/outputs -a
             ls /home/circleci/project/app/build/outputs/apk/release -a
             ls ~/project/app/build/outputs/apk/release -a
-            sudo chmod -R 775 ~/project/app/build/outputs/apk/release/apk-release-unsigned.apk
-            cp ~/project/app/build/outputs/apk/release/apk-release-unsigned.apk ~/project/app-build.apk
+           # sudo chmod -R 775 ~/project/app/build/outputs/apk/release/apk-release-unsigned.apk
+            # cp ~/project/app/build/outputs/apk/release/apk-release-unsigned.apk ~/project/app-build.apk
 
-      # - appgalleryconnect/upload:
-      #     appid: '105319627'
-      #     clientid: '105319627'
-      #     path: '/home/circleci/project/app/build/outputs/apk/app-release-unsigned.apk'
-      #     secret: test
-      #     suffix: apk
-      #     test: 'false'
+      - appgalleryconnect/upload:
+          appid: '105319627'
+          clientid: '105319627'
+          path: '~/project/app/build/outputs/apk/app-release-unsigned.apk'
+          secret: test
+          suffix: apk
+          test: 'false'
 
 
 # Invoke jobs via workflows

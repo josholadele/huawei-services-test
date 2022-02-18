@@ -45,10 +45,11 @@ jobs:
           name: Assemble release build
           command: |
             ./gradlew assembleRelease
+
       - appgalleryconnect/upload:
           appid: '105319627'
           clientid: '105319627'
-          path: '/build/apk/android.apk'
+          path: '/home/circleci/project/app/build/outputs/apk/app-release-unsigned.apk'
           secret: test
           suffix: apk
           test: 'false'

@@ -53,6 +53,7 @@ jobs:
             ls /home/circleci/project/app/build -a
             ls /home/circleci/project/app/build/outputs -a
             ls /home/circleci/project/app/build/outputs/apk/release -a
+            cp /home/circleci/project/app/build/outputs/apk/release/apk-release-unsigned.apk /home/circleci/project/app-build.apk
 
       # - appgalleryconnect/upload:
       #     appid: '105319627'

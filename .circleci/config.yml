@@ -62,7 +62,7 @@ jobs:
           appid: '105319627'
           clientid: '105319627'
           path: '/home/circleci/project/app/build/outputs/apk/release/app-release-unsigned.apk'
-          secret: test
+          secret: $CLIENT_SECRET
           suffix: apk
           test: 'false'
 

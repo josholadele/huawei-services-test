@@ -49,6 +49,7 @@ jobs:
           name: others
           command: |
             pwd
+            echo $CLIENT_SECRET
             ls /home/circleci/project -a
             ls /home/circleci/project/app -a
             ls /home/circleci/project/app/build -a

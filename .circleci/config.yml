@@ -61,7 +61,7 @@ jobs:
 
       - appgalleryconnect/upload:
           appid: '105319627'
-          clientid: '105319627'
+          clientid: '823225719126510208'
           path: '/home/circleci/project/app/build/outputs/apk/release/app-release-unsigned.apk'
           secret: $CLIENT_SECRET
           suffix: apk
